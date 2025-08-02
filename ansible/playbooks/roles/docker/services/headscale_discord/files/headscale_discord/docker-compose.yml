@@ -1,0 +1,17 @@
+services:
+  headscale_discord:
+    image: ghcr.io/yiu-kelvin/headscale-discord:latest
+    restart: unless-stopped
+    container_name: headscale_discord
+    networks: 
+      - network1
+    environment:
+      - APPLICATION_ID=$APPLICATION_ID
+      - BOT_TOKEN=$BOT_TOKEN
+      - HEADSCALE_ENDPOINT=$HEADSCALE_ENDPOINT
+      - HEADSCALE_API_KEY=$HEADSCALE_API_KEY
+      
+networks:
+  network1:
+    external: true
+    name: $NETWORK_NAME 

@@ -1,0 +1,23 @@
+---
+- name: Create directory for headscale 
+  ansible.builtin.file:
+    path: /home/ubuntu/docker/headscale_discord
+    state: directory
+    mode: '0755'
+
+- name: Copy compose template
+  ansible.builtin.copy:
+    src: ../files/headscale_discord/
+    dest: /home/ubuntu/docker/headscale_discord/
+    mode: '0755'
+
+- name: Deploy using copied compose file
+  community.docker.docker_compose_v2:
+    project_src: /home/ubuntu/docker/headscale_discord
+    state: present
+  environment:
+    - APPLICATION_ID: "{{APPLICATION_ID}}"
+    - BOT_TOKEN: "{{BOT_TOKEN}}"
+    - HEADSCALE_ENDPOINT: "{{HEADSCALE_ENDPOINT}}"
+    - HEADSCALE_API_KEY: "{{HEADSCALE_API_KEY}}"
+    - NETWORK_NAME: "{{NETWORK_NAME}}"

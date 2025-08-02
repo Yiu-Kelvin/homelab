@@ -1,0 +1,26 @@
+services:
+  caddy:
+    image: caddy:2.10.0-alpine
+    restart: unless-stopped
+    networks:
+      - network1
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /home/ubuntu/docker/caddy/conf:/etc/caddy
+      - /home/ubuntu/docker/caddy/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+networks:
+  network1:
+    external: true
+    name: $NETWORK_NAME 
+volumes:
+  caddy_data:
+  caddy_config:
+

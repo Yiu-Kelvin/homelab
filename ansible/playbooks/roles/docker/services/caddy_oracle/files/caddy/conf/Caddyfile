@@ -1,0 +1,4 @@
+headscale.pikaa.cc {
+	reverse_proxy headscale:8080
+}
+

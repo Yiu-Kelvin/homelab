@@ -1,0 +1,21 @@
+services:
+  headscale:
+    image: docker.io/headscale/headscale:0.26.1
+    restart: unless-stopped
+    container_name: headscale
+    networks:
+      - network1
+    command: serve
+    ports:
+      - "8080:8080"
+      - "21331:9090"
+      - "50433:50433"
+    volumes:
+      - /home/ubuntu/docker/headscale/config:/etc/headscale
+      - /home/ubuntu/docker/headscale/lib:/var/lib/headscale
+      - /home/ubuntu/docker/headscale/run:/var/run/headscale
+
+networks:
+  network1:
+    external: true
+    name: $NETWORK_NAME 

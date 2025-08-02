@@ -1,0 +1,19 @@
+---
+- name: Create directory for headscale 
+  ansible.builtin.file:
+    path: /home/ubuntu/docker/headscale
+    state: directory
+    mode: '0755'
+
+- name: Copy compose file
+  ansible.builtin.copy:
+    src: ../files/headscale/
+    dest: /home/ubuntu/docker/headscale/
+    mode: '0755'
+
+- name: Deploy using copied compose file
+  community.docker.docker_compose_v2:
+    project_src: /home/ubuntu/docker/headscale
+    state: present
+  environment:
+    - NETWORK_NAME: "{{NETWORK_NAME}}"

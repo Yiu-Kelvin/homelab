@@ -1,0 +1,22 @@
+---
+- name: Create directory for caddy 
+  ansible.builtin.file:
+    path: /home/ubuntu/docker/caddy
+    state: directory
+    mode: '0755'
+    recurse: yes
+
+- name: Copy compose file
+  ansible.builtin.copy:
+    src: ../files/caddy/
+    dest: /home/ubuntu/docker/caddy/
+    mode: '0755'
+    
+
+- name: Deploy using copied compose file
+  community.docker.docker_compose_v2:
+    project_src: /home/ubuntu/docker/caddy
+    state: present
+  environment:
+    - NETWORK_NAME: "{{NETWORK_NAME}}"
+
