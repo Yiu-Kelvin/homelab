@@ -1,6 +1,0 @@
-   plugin: oracle.oci.oci
-   config_file: ~/.oci/config
-   config_profile: DEFAULT
-   compose:
-     ansible_ssh_user: ubuntu
-

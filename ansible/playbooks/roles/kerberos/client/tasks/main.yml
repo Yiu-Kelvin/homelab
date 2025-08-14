@@ -1,0 +1,37 @@
+- name: Install client‑side Kerberos packages
+  ansible.builtin.apt:
+    name: "{{ kerberos_client_packages }}"
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Enable classic NTP if chrony is not installed
+  ansible.builtin.service:
+    name: ntp
+    state: started
+    enabled: true
+  become: true
+
+- name: Install /etc/krb5.conf from template
+  ansible.builtin.template:
+    src: krb5.conf.j2
+    dest: /etc/krb5.conf
+    owner: root
+    mode: "0644"
+  become: true
+  
+
+- name: Add user principal
+  command: >
+    kadmin.local -q "addprinc -pw {{ user_password }} {{ user_principal }}"
+  args:
+    creates: "/var/lib/krb5kdc/principal/{{ user_principal  | replace('/', '_') }}.keytab"
+  become: true
+  when: not ("/var/lib/krb5kdc/principal/{{ user_principal  | replace('/', '_') }}.keytab" is exists)
+  delegate_to: kerberos
+
+- name: login to principal
+  expect:
+    command: kinit -V {{ user_principal }}
+    responses:
+      "Password for .*:": "{{ user_password }}"

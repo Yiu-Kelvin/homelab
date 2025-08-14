@@ -1,0 +1,16 @@
+plugin: community.proxmox.proxmox
+user: ansible@pve
+token_id: ansible
+want_facts: true
+validate_certs: false
+token_secret: 69601de0-e88c-49d0-b9c2-d413a30c1fa6
+url: https://192.168.128.2:8006
+want_proxmox_nodes_ansible_host: false
+compose:
+  ansible_user: proxmox_ciuser | default('root')
+  ansible_host: proxmox_ipconfig0.ip | default(proxmox_net0.ip) | ipaddr('address')
+# hostvars:
+#   all:
+#     user: root
+#     ansible_user: root          # <-- SSH login for *all* hosts
+#     ansible_ssh_user: root      # optional legacy name

@@ -2,7 +2,13 @@ resource "proxmox_vm_qemu" "netbox-vm" {
   name        = "netbox"
   target_node = "ass"
   clone_id    = "8000"
-  ipconfig1   = "ip=192.168.168.25,gw=192.168.128.1"
+  ipconfig0   = "ip=192.168.10.12/24,gw=192.168.128.1"
+  pool        = "Terraform"
+  ciuser      = "ubuntu"
+  cipassword  = var.pm_vm_password
+  sshkeys     = var.pm_ssh_public_key
+
+
   cpu {
     cores   = 4
     sockets = 1

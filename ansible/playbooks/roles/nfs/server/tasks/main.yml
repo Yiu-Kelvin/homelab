@@ -1,0 +1,14 @@
+---
+- name: Install nfs server package
+  ansible.builtin.apt:
+    name: "nfs-kernel-server"
+    update_cache: yes
+  become: true
+
+- name: Install /etc/exports from template
+  ansible.builtin.template:
+    src: exports
+    dest: /etc/exports
+    owner: root
+    mode: "0644"
+  become: true

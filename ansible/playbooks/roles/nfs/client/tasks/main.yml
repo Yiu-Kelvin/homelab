@@ -1,0 +1,14 @@
+---
+- name: Install nfs server package
+  ansible.builtin.apt:
+    name: "nfs-common"
+    update_cache: yes
+  become: true
+
+- name: Mount an NFS volume
+  ansible.posix.mount:
+    src:  "{{ hostvars['nfs2']['ansible_host'] }}:/mnt/Drive1"
+    path: /mnt/Drive1
+    opts: rw,sync,hard
+    state: mounted
+    fstype: nfs

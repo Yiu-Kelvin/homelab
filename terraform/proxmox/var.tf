@@ -2,10 +2,18 @@ variable "pm_api_url" {
   type = string
 }
 
-variable "pm_api_token_id" {
+variable "pm_user" {
   type = string
 }
 
-variable "pm_api_token_secret" {
+variable "pm_password" {
+  type = string
+}
+
+variable "pm_vm_password" {
+  type = string
+}
+
+variable "pm_ssh_public_key" {
   type = string
 }

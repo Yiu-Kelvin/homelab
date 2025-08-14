@@ -37,7 +37,7 @@ resource "oci_core_security_list" "main_security_list" {
   }
   ingress_security_rules {
     source   = "${chomp(data.http.my_ip.response_body)}/32"
-    protocol = 6
+    protocol = "all"
   }
 }
 
@@ -79,20 +79,15 @@ resource "oci_core_network_security_group_security_rule" "https_security_group_r
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "grpc_security_group_rule" {
+
+resource "oci_core_network_security_group_security_rule" "strongswan_security_group_rule2" {
   network_security_group_id = oci_core_network_security_group.vm_network_security_group.id
-  protocol                  = 6
-  source                    = "0.0.0.0/0"
+  protocol                  = "all"
+  source                    = "119.247.248.131/32"
   direction                 = "INGRESS"
 
   description = "allow for headscale grpc access"
 
-  tcp_options {
-    destination_port_range {
-      max = 50443
-      min = 50443
-    }
-  }
 }
 
 resource "oci_core_network_security_group_security_rule" "http_security_group_rule" {
@@ -113,7 +108,7 @@ resource "oci_core_network_security_group_security_rule" "http_security_group_ru
 
 resource "oci_core_network_security_group_security_rule" "allow_all_egress_security_group_rule" {
   network_security_group_id = oci_core_network_security_group.vm_network_security_group.id
-  protocol                  = 6
+  protocol                  = "all"
   direction                 = "EGRESS"
   destination               = "0.0.0.0/0"
   destination_type          = "CIDR_BLOCK"

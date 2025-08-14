@@ -1,0 +1,74 @@
+---
+# 1. Install required packages
+- name: Install Kerberos packages
+  apt:
+    name: "{{ kerberos_packages }}"
+    state: present
+    update_cache: true
+  become: true
+
+# 2. Deploy the main krb5.conf (client + server view)
+- name: Deploy krb5.conf
+  template:
+    src: krb5.conf.j2
+    dest: "{{ krb5_conf_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart krb5-kdc
+  become: true
+
+# 3. Deploy the KDC configuration
+- name: Deploy kdc.conf
+  template:
+    src: kdc.conf.j2
+    dest: "{{ kdc_conf_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart krb5-kdc
+  become: true
+
+# 4. Deploy the kadm5 ACL file (who can administer)
+- name: Deploy kadm5.acl
+  template:
+    src: kadm5.acl.j2
+    dest: "{{ kadm5_acl_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart krb5-admin-server
+  become: true
+
+# 5. Initialise the KDC database (only the first run)
+- name: Create KDC database (if not present)
+  command: >
+    kdb5_util create -s -r {{ kerberos_realm }} -P {{ kerberos_admin_password }}
+  args:
+    creates: "{{ kdc_db_path }}"
+  become: true
+  when: not (kdc_db_path is exists)
+
+# 6. Add the admin principal (only if it does not exist)
+- name: Add admin principal
+  command: >
+    kadmin.local -q "addprinc -pw {{ kerberos_admin_password }} {{ kerberos_admin_principal }}"
+  args:
+    creates: "/var/lib/krb5kdc/principal/{{ kerberos_admin_principal | replace('/', '_') }}.keytab"
+  become: true
+  when: not ("/var/lib/krb5kdc/principal/{{ kerberos_admin_principal | replace('/', '_') }}.keytab" is exists)
+
+# 7. Ensure services are enabled and started
+- name: Enable and start krb5-kdc
+  service:
+    name: krb5-kdc
+    state: started
+    enabled: true
+  become: true
+
+- name: Enable and start krb5-admin-server
+  service:
+    name: krb5-admin-server
+    state: started
+    enabled: true
+  become: true

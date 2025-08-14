@@ -1,0 +1,12 @@
+---
+- name: install git
+  dnf:
+    name:
+      - git
+
+- name: git login
+  ansible.builtin.shell: echo $GITHUB_KEY | docker login ghcr.io -u Yiu-Kelvin --password-stdin
+  environment:
+    GITHUB_KEY: "{{ github_registery_api_key }}"
+  register: hello
+- debug: msg="{{ hello.stdout }}" 

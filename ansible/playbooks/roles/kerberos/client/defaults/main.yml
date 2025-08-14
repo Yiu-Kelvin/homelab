@@ -1,0 +1,16 @@
+kerberos_realm: "pikaa.cc"
+kerberos_domain: "krb.pikaa.cc"
+
+kerberos_kdc_port: 88                # KDC UDP/TCP port
+kerberos_admin_port: 749             # Admin server port
+
+# Admin principal that will be created after the DB is built
+kerberos_admin_principal: "admin/admin"
+kerberos_admin_password:  "ChangeMe123"
+
+kerberos_client_packages:
+  - python3-pexpect
+  - krb5-user          # Provides kinit, klist, etc.
+  - libpam-krb5        # Optional – enables PAM login with Kerberos
+  - libpam0g
+  - ntp                # If you prefer the classic NTP daemon

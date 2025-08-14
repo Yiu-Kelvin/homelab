@@ -25,9 +25,11 @@ provider "cloudflare" {
 module "my_proxmox" {
   source = "./proxmox"
 
-  pm_api_url          = var.pm_api_url
-  pm_api_token_id     = var.pm_api_token_id
-  pm_api_token_secret = var.pm_api_token_secret
+  pm_api_url        = var.pm_api_url
+  pm_user           = var.pm_user
+  pm_password       = var.pm_password
+  pm_vm_password    = var.pm_vm_password
+  pm_ssh_public_key = var.pm_ssh_public_key
 }
 
 module "my_oci" {

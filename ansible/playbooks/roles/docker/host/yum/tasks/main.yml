@@ -1,0 +1,23 @@
+---
+- name: Install yum-utils
+  ansible.builtin.dnf:
+    name: yum-utils
+    state: present
+
+- name: Add Docker CE repository
+  ansible.builtin.shell:
+    cmd: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo # Prevent re-running if repo already exists
+
+- name: Install Docker Engine
+  ansible.builtin.dnf:
+    name: docker-ce
+    state: latest
+    disable_excludes: docker-ce # Important for Oracle Linux to avoid conflicts
+
+- name: Start and enable Docker service
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: true

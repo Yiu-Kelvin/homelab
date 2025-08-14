@@ -1,0 +1,16 @@
+[libdefaults]
+    default_realm = {{ kerberos_realm }}
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+    ticket_lifetime = 24h
+    forwardable = true
+
+[realms]
+    {{ kerberos_realm }} = {
+        kdc = {{ ansible_fqdn }}:{{ kerberos_kdc_port }}
+        admin_server = {{ ansible_fqdn }}:{{ kerberos_admin_port }}
+    }
+
+[domain_realm]
+    .{{ ansible_fqdn }} = {{ kerberos_realm }}
+    {{ ansible_fqdn }} = {{ kerberos_realm }}

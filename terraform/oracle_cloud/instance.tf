@@ -8,19 +8,19 @@ resource "oci_core_instance" "ubuntu_instance" {
     memory_in_gbs = "16"
   }
   source_details {
-    source_id   = "ocid1.image.oc1.ap-singapore-1.aaaaaaaavpms5nv7qmalnorgvemrgumiln5en2o6xmxllosxu5cdaqmgycyq"
+    source_id   = "ocid1.image.oc1.ap-singapore-1.aaaaaaaalp5rsngiayobfuxdurkxdnxgkxjfbfqpl2c2yebldjmrrtbrteaa"
     source_type = "image"
   }
 
   # Optional
-  display_name = "ubuntu"
+  display_name = "oracle_host"
   create_vnic_details {
     assign_public_ip = true
     subnet_id        = oci_core_subnet.vcn-public-subnet.id
     nsg_ids          = [oci_core_network_security_group.vm_network_security_group.id]
   }
   metadata = {
-    ssh_authorized_keys = file("/home/yk/.ssh/id_ed25519.pub")
+    ssh_authorized_keys = file("/tmp/authorized_keys")
   }
   preserve_boot_volume = false
 

@@ -1,0 +1,23 @@
+# -------------------------------------------------
+# General Kerberos settings – override them in your
+# playbook or host/group vars as needed.
+# -------------------------------------------------
+kerberos_realm: pikaa.cc           # The Kerberos realm (upper‑case)
+kerberos_kdc_port: 88                # KDC UDP/TCP port
+kerberos_admin_port: 749             # Admin server port
+
+# Admin principal that will be created after the DB is built
+kerberos_admin_principal: "admin/admin"
+kerberos_admin_password:  "ChangeMe123"
+
+# Packages (Ubuntu)
+kerberos_packages:
+  - krb5-kdc
+  - krb5-admin-server
+  - krb5-user
+
+# File locations (Debian/Ubuntu defaults)
+krb5_conf_path: /etc/krb5.conf
+kdc_conf_path: /etc/krb5kdc/kdc.conf
+kadm5_acl_path: /etc/krb5kdc/kadm5.acl
+kdc_db_path: /var/lib/krb5kdc/principal
