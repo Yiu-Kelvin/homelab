@@ -2,5 +2,5 @@
  config_file: ~/.oci/config
  config_profile: DEFAULT
  compose:
-   ansible_ssh_user: opc
+   ansible_ssh_user: "'opc'"
 

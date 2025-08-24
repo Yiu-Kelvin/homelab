@@ -6,11 +6,12 @@ resource "proxmox_lxc" "nfs" {
   password        = var.pm_vm_password
   ssh_public_keys = var.pm_ssh_public_key
   onboot          = true
-  unprivileged    = true
+  unprivileged    = false
   start           = true
 
   features {
     nesting = true
+    mount   = "nfs"
   }
 
   rootfs {

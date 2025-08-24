@@ -2,7 +2,7 @@ resource "proxmox_vm_qemu" "postgres-vm" {
   name        = "postgres2"
   target_node = "ass"
   clone_id    = "8000"
-  ipconfig0   = "ip=192.168.128.22/24,gw=192.168.128.1"
+  ipconfig0   = "ip=192.168.10.22/24,gw=192.168.128.1"
   pool        = "Terraform"
   ciuser      = "ubuntu"
   cipassword  = var.pm_vm_password

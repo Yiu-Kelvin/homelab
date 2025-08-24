@@ -5,10 +5,33 @@
     update_cache: yes
   become: true
 
+- name: Add service principal
+  command: >
+    kadmin.local -q "addprinc -randkey nfs/postgres.pikaa.cc@pikaa.cc"
+  become: true
+  delegate_to: kerberos
+
+- name: Create Keytab file
+  command: kadmin.local -q "ktadd -k /tmp/service_client.keytab nfs/postgres.pikaa.cc@pikaa.cc"
+  delegate_to: kerberos
+
+- name: Fetch keytab file
+  fetch: 
+    src: /tmp/service_client.keytab
+    dest: /tmp/krb5.keytab
+    flat: yes
+  delegate_to: kerberos
+
+- name: Copy keytab to host
+  copy: 
+    src: /tmp/krb5.keytab
+    dest: /etc/krb5.keytab
+
 - name: Mount an NFS volume
   ansible.posix.mount:
     src:  "{{ hostvars['nfs2']['ansible_host'] }}:/mnt/Drive1"
     path: /mnt/Drive1
-    opts: rw,sync,hard
+    opts: rw,sync,hard,sec=krb5p
     state: mounted
     fstype: nfs
+

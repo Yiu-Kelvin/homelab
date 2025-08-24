@@ -1,1 +1,2 @@
-/mnt/Drive1/    *(rw,sec=krb5p)
+/mnt 192.168.0.0/16(rw,sync,subtree_check,crossmnt,all_squash,sec=krb5)
+/mnt/Drive1 192.168.0.0/16(rw,sync,subtree_check,crossmnt,all_squash,sec=krb5)
