@@ -23,7 +23,7 @@ resource "proxmox_vm_qemu" "talos-1" {
     ide {
       ide2 {
         cdrom {
-          iso = "local:iso/nocloud-amd64.iso"
+          iso = "local:iso/talos_qemu_only.iso"
         }
       }
     }
@@ -50,6 +50,12 @@ resource "proxmox_vm_qemu" "talos-2" {
   memory = 16384
   scsihw = "virtio-scsi-pci"
 
+  pci {
+    id = 0
+    pcie = true
+    raw_id = "0000:00:02"
+    primary_gpu = true
+  }
   agent = 1
   network {
     id     = 0
@@ -60,7 +66,7 @@ resource "proxmox_vm_qemu" "talos-2" {
     ide {
       ide2 {
         cdrom {
-          iso = "local:iso/nocloud-amd64.iso"
+          iso = "local:iso/talos_qemu_i915.iso"
         }
       }
     }
@@ -95,11 +101,17 @@ resource "proxmox_vm_qemu" "talos-3" {
     bridge = "vmbr0"
     model  = "virtio"
   }
+  pci {
+    id = 0
+    pcie = true
+    raw_id = "0000:00:02"
+    primary_gpu = true
+  }
   disks {
     ide {
       ide2 {
         cdrom {
-          iso = "local:iso/nocloud-amd64.iso"
+          iso = "local:iso/talos_qemu_i915.iso"
         }
       }
     }

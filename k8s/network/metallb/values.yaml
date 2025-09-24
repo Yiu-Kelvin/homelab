@@ -1,0 +1,12 @@
+controller:
+  enabled: true
+  replicas: 1
+
+speaker:
+  enabled: true
+  replicas: 2  # One per node (or use daemonset)
+
+logLevel: info
+
+crds:
+  create: true
