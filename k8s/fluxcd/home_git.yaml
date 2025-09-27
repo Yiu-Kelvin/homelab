@@ -27,7 +27,6 @@ spec:
       sourceRef:
         kind: GitRepository
         name: homelab-repo  # References the Git source
-      # No version needed for local Git charts; use interval for polling
       interval: 1m
       version: ">=1.0.0"  # Optional semver filter if tagging charts
   values:
