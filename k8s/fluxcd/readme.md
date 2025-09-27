@@ -1,5 +1,5 @@
 # Basic setup
-## Install flux to cluster
+## Install flux to the cluster
 ```
 export GITHUB_TOKEN=<your-token>
 export GITHUB_USER=<your-username>
