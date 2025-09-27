@@ -31,18 +31,18 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: homelab
-  namespace: homelab-prod
+  namespace: flux-system
 spec:
   interval: 1m
   chart:
     spec:
+      targetNamespace: homelab-prod
       chart: ./k8s/homelab  # Path to chart dir in the Git repo (relative to GitRepository path)
       sourceRef:
         kind: GitRepository
         name: flux-system  # References the Git source
       # No version needed for local Git charts; use interval for polling
       interval: 1m
-      version: ">=1.0.0"  # Optional semver filter if tagging charts
   values:
     replicaCount: 3
 
