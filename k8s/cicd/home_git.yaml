@@ -1,0 +1,34 @@
+# GitRepository (fetches the repo)
+apiVersion: source.toolkit.fluxcd.io/v1beta3
+kind: GitRepository
+metadata:
+  name: homelab-repo
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/Yiu-Kelvin/homelab  # Your Git repo
+  ref:
+    branch: main
+  secretRef:
+    name: git-credentials  # If private repo
+
+---
+# HelmRelease (deploys from the Git-fetched chart)
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: homelab
+  namespace: homelab-prod
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: ./k8s/homelab  # Path to chart dir in the Git repo (relative to GitRepository path)
+      sourceRef:
+        kind: GitRepository
+        name: homelab-repo  # References the Git source
+      # No version needed for local Git charts; use interval for polling
+      interval: 1m
+      version: ">=1.0.0"  # Optional semver filter if tagging charts
+  values:
+    replicaCount: 3
