@@ -33,10 +33,10 @@ metadata:
   name: homelab
   namespace: flux-system
 spec:
+  targetNamespace: homelab-prod
   interval: 1m
   chart:
     spec:
-      targetNamespace: homelab-prod
       chart: ./k8s/homelab  # Path to chart dir in the Git repo (relative to GitRepository path)
       sourceRef:
         kind: GitRepository
