@@ -31,7 +31,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: homelab
-  namespace: flux-system
+  namespace: homelab
 spec:
   interval: 1m
   chart:
