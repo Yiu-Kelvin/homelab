@@ -2,14 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  # 1. Sources must be applied first so they are available for HelmReleases.
   - ../sources/helm
-
-helmCharts:
-  # 3. Infrastructure
-  # This CR tells the Kustomize Controller to reconcile 'prod/infrastructure/'
   - infra-recon.yaml 
-  
-  # 4. Applications (Must depend on infrastructure being complete)
-  # This CR tells the Kustomize Controller to reconcile 'prod/applications/'
   - app-recon.yaml

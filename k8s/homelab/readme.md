@@ -11,6 +11,6 @@ flux bootstrap github \
   --owner=$GITHUB_USER \
   --repository=homelab \
   --branch=main \
-  --path=./k8s/cicd \
+  --path=./k8s/homelab \
   --personal
 ```
