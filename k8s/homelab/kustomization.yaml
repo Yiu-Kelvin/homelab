@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../sources/helm
   - infra-recon.yaml 
-  - app-recon.yaml
+  # - app-recon.yaml

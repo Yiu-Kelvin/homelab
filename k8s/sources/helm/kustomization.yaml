@@ -1,0 +1,9 @@
+# File path: sources/helm-repositories/kustomization.yaml
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  # List all your HelmRepository manifest files:
+  - metallb.yaml                  
+  - nginx.yaml
