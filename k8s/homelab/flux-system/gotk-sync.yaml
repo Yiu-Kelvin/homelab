@@ -20,29 +20,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./k8s/cicd
+  path: ./k8s/homelab
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
----
-# HelmRelease (deploys from the Git-fetched chart)aa
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: homelab
-  namespace: flux-system
-spec:
-  targetNamespace: homelab-prod
-  interval: 1m
-  chart:
-    spec:
-      chart: ./k8s/homelab  # Path to chart dir in the Git repo (relative to GitRepository path)
-      sourceRef:
-        kind: GitRepository
-        name: flux-system  # References the Git source
-      # No version needed for local Git charts; use interval for polling
-      interval: 1m
-  values:
-    replicaCount: 3
-
