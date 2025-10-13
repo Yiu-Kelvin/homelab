@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   # No explicit dependsOn needed here if sources are applied by the root Kustomization above.
-  path: main/infra # Targets the infrastructure folder 
+  path: ./infra/ # Targets the infrastructure folder 
   prune: true
   sourceRef:
     kind: GitRepository
