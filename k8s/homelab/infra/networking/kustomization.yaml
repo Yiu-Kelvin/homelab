@@ -1,0 +1,7 @@
+kustomization.yaml
+resources:
+  - ./nginx_ingress/namespace.yaml
+  - ./nginx_ingress/helm_release.yaml
+  - ./metallb/helm_release.yaml
+  - ./metallb/namespace.yaml
+  - ./metallb/ip_address_pool.yaml
