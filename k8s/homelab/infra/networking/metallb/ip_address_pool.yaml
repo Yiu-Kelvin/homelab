@@ -15,5 +15,7 @@ metadata:
   name: default-advertisement
   namespace: metallb-system
 spec:
+  dependsOn:
+    - name: metallb
   ipAddressPools:
     - default-pool
