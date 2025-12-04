@@ -1,0 +1,12 @@
+K8S_1=192.168.122.84
+K8S_2=192.168.122.213
+K8S_3=192.168.122.69
+
+sudo kubeadm init \
+	--control-plane-endpoint $K8S_1 \
+	--upload-certs \
+	--pod-network-cidr "10.244.0.0/16"
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
