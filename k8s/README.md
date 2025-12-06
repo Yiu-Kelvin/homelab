@@ -54,11 +54,11 @@ kubectl taint nodes <hostname> node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 
 # Create Kubernetes secrets for Oracle Secret Manager
-```
+```bash
 vim oracle-auth-secret.yaml
 ```
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -90,7 +90,7 @@ flux bootstrap github \
 ```
 
 # Confirm working
-```
+```bash
 flux get kustomizations
 flux logs -f 
 kubectl get pods
