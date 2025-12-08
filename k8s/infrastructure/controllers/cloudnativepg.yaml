@@ -20,7 +20,7 @@ metadata:
   namespace: postgres-database
 spec:
   interval: 5m
-  targetNamespace: postgres-databse
+  targetNamespace: postgres-database
   install:
     createNamespace: true
   upgrade:
