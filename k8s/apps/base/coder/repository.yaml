@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: coder
+  namespace: flux-system # Must be visible to the helm-controller
+spec:
+  interval: 10m
+  url: https://helm.coder.com/v2

@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: coder
+  namespace: coder
+spec:
+  chart:
+    spec:
+      version: ">=1.0.0"
+  values:
+    ingress:
+      hosts:
+        - host: coder.pikaa.cc
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
