@@ -12,19 +12,11 @@ spec:
 
   bootstrap:
     initdb:
-      database: app_db
-      owner: app_user  # CNPG will automatically generate a secret for this user
+      database: coder_db
+      owner: coder_user  # CNPG will automatically generate a secret for this user
 
   imageName: ghcr.io/cloudnative-pg/postgresql:16.2
-
+  secretName: coder-db-secret
   monitoring:
     enablePodMonitor: true
 
-  # Backup configuration (recommended for production)
-  # Uncomment and configure with your S3/compatible object storage settings
-  # backup:
-  #   s3:
-  #     endpointURL: "https://<your-s3-endpoint>"
-  #     bucket: "<your-bucket-name>"
-  #     secret:
-  #       name: "s3-credentials" # Secret containing S3 credentials
