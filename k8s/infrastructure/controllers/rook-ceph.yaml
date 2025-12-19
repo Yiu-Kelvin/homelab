@@ -28,5 +28,5 @@ spec:
       chart: rook-ceph
       sourceRef:
         kind: HelmRepository
-        name: rook-ceph
+        name: rook-release/rook-ceph
         namespace: flux-system
