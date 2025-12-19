@@ -11,7 +11,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://rook.github.io/cluster-operator
+  url: https://charts.rook.io/release
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
