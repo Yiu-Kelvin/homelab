@@ -66,7 +66,6 @@ metadata:
   namespace: external-secrets
   labels:
     type: oracle
-type: Opaque
 stringData:
   privateKey: |
    -----BEGIN RSA PRIVATE KEY-----
@@ -77,6 +76,22 @@ stringData:
 
 ```
 kubectl apply -f oracle-auth-secret.yaml
+```
+# Create Kubernetes secrets for Heketi (glusterfs volume management)
+```bash
+vim heketi-ssh-secret.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: heketi-secret
+stringData:
+  privateKey: |
+   -----BEGIN RSA PRIVATE KEY-----
+   <YOUR_PRIVATE_KEY_HERE>
+   -----END RSA PRIVATE KEY-----
 ```
 
 # Flux Bootstrap

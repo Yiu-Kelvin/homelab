@@ -37,3 +37,4 @@ terraform.rc
 
 .venv/
 oracle-auth-secret.yaml
+heketi-ssh-secret.yaml
