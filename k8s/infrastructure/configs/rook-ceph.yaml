@@ -2,7 +2,7 @@ apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
   name: rook-ceph
-  namespace: rook-ceph                        # Rook namespace (operator + cluster)
+  namespace: storage
 spec:
   cephVersion:
     image: quay.io/ceph/ceph:v18.2.2         # Ceph "Reef" example (adjust as needed)
