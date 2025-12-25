@@ -7,9 +7,68 @@ spec:
   storage:
     useAllNodes: false
     useAllDevices: false
-    config:
-      osd:
-        osd_data_path: "/home/ceph"  # Custom path
-        osd_journal_size: "1GB"
-        osd_pool_default_size: 3
 
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph                        # Rook namespace (operator + cluster)
+spec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v18.2.2         # Ceph "Reef" example (adjust as needed)
+    allowUnsupported: false
+  dataDirHostPath: /var/lib/rook             # Where Rook stores metadata on nodes
+  # Use host networking cautiously. Often false is fine; true helps in restricted CNI setups.
+  network:
+    hostNetwork: false
+    # You can also segregate cluster/public networks via 'provider' (e.g., 'host') + 'selectors'
+    # provider: host
+    # selectors:
+    #   public: "node-role.kubernetes.io/storage="
+    #   cluster: "node-role.kubernetes.io/storage="
+  mon:
+    count: 3                                 # MONs: 3 for HA (avoid even numbers)
+    allowMultiplePerNode: false
+  mgr:
+    count: 1                                 # MGR count (Ceph will handle standby internally)
+  dashboard:
+    enabled: true                            # Ceph Dashboard
+    # ssl: true
+  # Resources/priority classes are recommended in prod; keep omitted for brevity.
+  # resources:
+  # priorityClassName: system-cluster-critical
+
+  # Storage: configure OSDs
+  storage:
+    useAllNodes: true                        # Use all schedulable nodes (or label-select)
+    useAllDevices: false                     # false: only consume devices you list below
+    devices:                                 # Explicit device list per node via MachineDisruptionBudget or node selector is better
+      - name: "/dev/mapper/datavg-home"                      # Example device name (adjust per node)
+      - name: "sdb"
+    # Alternatively, enable the device discovery operator:
+    # deviceFilter: "^sd[b-z]$"               # Regex filter
+  healthCheck:
+    daemonHealth:
+      mon:
+        interval: 45s
+        timeout: 600s
+      osd:
+        interval: 60s
+        timeout: 600s
+      status:
+        interval: 60s
+
+  # Crash collector helps with automated crash reports into Ceph
+  crashCollector:
+    disable: false
+
+  # Security context (drop capabilities) and csi settings can be tuned based on your cluster policy
+  csi:
+    enableRbdDriver: true
+    enableCephfsDriver: true
+    # setPluginLogLevel: 5
+    # allowUnsupported: false
+
+  # Monitoring
+  monitoring:
+    enabled: true                            # Prometheus metrics ServiceMonitors
