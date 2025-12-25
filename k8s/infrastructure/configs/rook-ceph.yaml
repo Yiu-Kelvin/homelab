@@ -52,13 +52,4 @@ spec:
   crashCollector:
     disable: false
 
-  # Security context (drop capabilities) and csi settings can be tuned based on your cluster policy
-  csi:
-    enableRbdDriver: true
-    enableCephfsDriver: true
-    # setPluginLogLevel: 5
-    # allowUnsupported: false
 
-  # Monitoring
-  monitoring:
-    enabled: true                            # Prometheus metrics ServiceMonitors
