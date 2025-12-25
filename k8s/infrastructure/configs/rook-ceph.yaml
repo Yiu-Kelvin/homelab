@@ -2,17 +2,6 @@ apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
   name: rook-ceph
-  namespace: rook-ceph
-spec:
-  storage:
-    useAllNodes: false
-    useAllDevices: false
-
----
-apiVersion: ceph.rook.io/v1
-kind: CephCluster
-metadata:
-  name: rook-ceph
   namespace: rook-ceph                        # Rook namespace (operator + cluster)
 spec:
   cephVersion:
