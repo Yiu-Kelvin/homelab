@@ -6,4 +6,4 @@ resources:
   # - repository.yaml
   # - release.yaml
   - database.yaml
-  - externalsecret.yaml
+  # - externalsecret.yaml
