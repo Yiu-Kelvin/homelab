@@ -8,7 +8,7 @@ spec:
     image: quay.io/ceph/ceph:v18.2.2         # Ceph "Reef" example (adjust as needed)
     allowUnsupported: false
   dataDirHostPath: /var/lib/rook             # Where Rook stores metadata on nodes
-  # Use host networking cautiously. Often false is fine; true helps in restricted CNI setups.
+  # Use host networking cautiously. Often false is fine; true helps in restricted CNI setups.a
   network:
     hostNetwork: false
     # You can also segregate cluster/public networks via 'provider' (e.g., 'host') + 'selectors'
