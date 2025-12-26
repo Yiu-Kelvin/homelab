@@ -33,8 +33,9 @@ spec:
     useAllNodes: true                        # Use all schedulable nodes (or label-select)
     useAllDevices: false                     # false: only consume devices you list below
     devices:                                 # Explicit device list per node via MachineDisruptionBudget or node selector is better
-      - name: "/dev/mapper/datavg-data"                      # Example device name (adjust per node)
+      - name: "/dev/datavg/data"                      # Example device name (adjust per node)
       - name: "sdb"
+
     # Alternatively, enable the device discovery operator:
     # deviceFilter: "^sd[b-z]$"               # Regex filter
   healthCheck:
