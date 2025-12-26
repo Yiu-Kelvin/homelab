@@ -5,4 +5,4 @@ resources:
   - cert-manager.yaml
   - external-secrets.yaml
   - cloudnativepg.yaml
-  # - rook-ceph.yaml
+  - rook-ceph.yaml
