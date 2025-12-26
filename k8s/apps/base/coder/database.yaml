@@ -16,7 +16,6 @@ spec:
       owner: coder_user  # CNPG will automatically generate a secret for this user
 
   imageName: ghcr.io/cloudnative-pg/postgresql:16.2
-  secretName: coder-db-secret
   monitoring:
     enablePodMonitor: true
 
