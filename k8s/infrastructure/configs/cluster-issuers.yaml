@@ -6,9 +6,9 @@ metadata:
 spec:
   acme:
     # Replace the email address with your own contact emaila
-    email: fluxcdbot@users.noreply.github.com
+    email: k8s-tls@pikaamail.com
     # The server is replaced in /clusters/production/infrastructure.yaml
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-nginx
     solvers:

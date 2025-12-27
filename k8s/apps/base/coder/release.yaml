@@ -25,6 +25,10 @@ spec:
         className: nginx
         host: "coder.pikaa.cc"
         wildcardHost: "*-coder.pikaa.cc"
+        tls:
+          enable: true
+          secretName: coder-tls-secret
+          wildcardSecretName: coder-wildcard-tls-secret
 
   chart:
     spec:

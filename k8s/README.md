@@ -1,4 +1,4 @@
-# Cluster prerequisite
+# Node prerequisite
 ```bash
 hostnamectl set-hostname <hostname>
 
@@ -32,7 +32,7 @@ systemctl enable --now kubelet
 sysctl --system
 ```
 
-# Cluster Setup (first node)
+# First Node Setup
 ```bash
 kubeadm init --control-plane-endpoint "192.168.0.14" --upload-certs --pod-network-cidr "10.244.0.0/16"
 
@@ -44,7 +44,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl taint nodes <hostname> node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 
-# Cluster Setup (other nodes)
+# Other Nodes Setup (Copy command from last step's output)
 ```bash
 kubeadm join 192.168.0.14:6443 --token <token>  --discovery-token-ca-cert-hash <ca-cert>
 
@@ -76,10 +76,6 @@ stringData:
 
 ```
 kubectl apply -f oracle-auth-secret.yaml
-```
-# Create Kubernetes secrets for Heketi (glusterfs volume management)
-```bash
-vim heketi-ssh-secret.yaml
 ```
 
 # Flux Bootstrap
