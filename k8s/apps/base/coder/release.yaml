@@ -16,10 +16,16 @@ spec:
             secretKeyRef:
               name: postgres-db-app   
               key: uri
+        - name: CODER_WILDCARD_ACCESS_URL
+          value: "*-coder.pikaa.cc"
+
+        - name: CODER_ACCESS_URL
+          value: "https://coder.pikaa.cc"
       ingress:
         enabled: true
         className: nginx
-        host: "*.coder.pikaa.cc"
+        host: "coder.pikaa.cc"
+        wildcardHost: "*-coder.pikaa.cc"
 
   chart:
     spec:
