@@ -27,7 +27,8 @@ spec:
         tls:
           enable: true
           secretName: coder-tls-secret
-
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
   chart:
     spec:
       chart: coder
