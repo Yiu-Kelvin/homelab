@@ -16,6 +16,11 @@ spec:
             secretKeyRef:
               name: postgres-db-app   
               key: uri
+      ingress:
+        enabled: true
+        className: nginx
+        host: "*.coder.pikaa.cc"
+
   chart:
     spec:
       chart: coder
