@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: coder
 resources:
   - namespace.yaml
-  # - repository.yaml
-  # - release.yaml
+  - repository.yaml
+  - release.yaml
   - database.yaml
   - externalsecret.yaml
