@@ -18,7 +18,6 @@ spec:
               key: uri
         - name: CODER_WILDCARD_ACCESS_URL
           value: "*-coder.pikaa.cc"
-
         - name: CODER_ACCESS_URL
           value: "https://coder.pikaa.cc"
       ingress:
