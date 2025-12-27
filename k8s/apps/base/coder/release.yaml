@@ -22,5 +22,5 @@ spec:
       version: "2.29.0" 
       sourceRef:
         kind: HelmRepository
-        name: coder-v2 
+        name: coder
         namespace: flux-system
