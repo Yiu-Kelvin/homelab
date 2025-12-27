@@ -13,7 +13,7 @@ spec:
   bootstrap:
     initdb:
       database: coder_db
-      owner: coder_user  # CNPG will automatically generate a secret for this user
+      owner: coder_user  
 
   imageName: ghcr.io/cloudnative-pg/postgresql:16.2
   monitoring:
